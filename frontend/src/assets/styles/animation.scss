@@ -1,0 +1,123 @@
+@import './var.scss';
+
+// 导航栏动画
+.menu-bottom--animated {
+  /*绝对定位*/
+  position: relative;
+  /*设置透明背景*/
+  background-color: rgba(0,0,0,0) !important;
+}
+
+/*hover状态下展示底部横线*/
+.menu-bottom--animated:after {
+  /*相对定位*/
+  position: absolute;
+  content: "";
+  /*设置横线位于menus_item元素底部*/
+  bottom: -0.1rem;
+  width: 100%;
+  /*设置底部横线颜色、宽度等*/
+  border-bottom: 0.1rem solid #409EFF;
+  /*设置横线居中*/
+  left: 50%;
+  /*设置透明度为0*/
+  opacity: 0;
+  /*设置动画：先进后出*/
+  transform: translate(-50%) scaleX(0);
+  transition: .3s ease-in-out;
+}
+/*设置hover后样式*/
+.menu-bottom--animated:hover::after {
+  /*透明度为1,透明*/
+  opacity: 1;
+  transform: translate(-50%) scaleX(1);
+}
+
+// 分割线动画
+.hr--animated {
+  position: relative;
+  margin: 1rem auto;
+  width: calc(100% - 4px);
+  border: 2px dashed #a4d8fa;
+  background: #fff;
+}
+.hr--animated:hover:before {
+  left: calc(95% - 20px);
+}
+.hr--animated:before {
+  position: absolute;
+  top: -10px;
+  left: 5%;
+  z-index: 1;
+  color: #49b1f5;
+  content: '\f0c4';
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+  transition: all 1s ease-in-out;
+}
+
+.link--animated {
+  transition: all 0.2s ease-in-out;
+}
+
+.link--animated:hover {
+  color: #49b1f5 !important;
+  cursor: pointer;
+}
+
+// 按钮动画
+.button--animated {
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+  transition-duration: 1s;
+  transition-property: color;
+}
+.button--animated:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: #ff7242;
+  content: '';
+  transition-timing-function: ease-out;
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.button--animated:hover:before {
+  transition-timing-function: cubic-bezier(0.45, 1.64, 0.47, 0.66);
+  transform: scaleX(1);
+}
+
+// 滚动箭头特效x`
+.scroll-down-effects {
+  position: absolute;
+  color: $white;
+}
+.scroll-down-effects {
+  animation: scroll-down-effect 1.5s infinite;
+}
+@keyframes scroll-down-effect {
+  0% {
+    top: 0;
+    opacity: 0.4;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+  }
+  50% {
+    top: -16px;
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    top: 0;
+    opacity: 0.4;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    filter: alpha(opacity=40);
+  }
+}

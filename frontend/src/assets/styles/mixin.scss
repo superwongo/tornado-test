@@ -1,0 +1,40 @@
+/*文本格式化，超出范围，显示省略号*/
+@mixin text-overflow($line:1) {
+  display: -webkit-box;
+  /*设置伸缩盒排列方式*/
+  -webkit-box-orient: vertical;
+  /*溢出两行省略号代替*/
+  -webkit-line-clamp: $line;
+  /*隐藏溢出信息*/
+  overflow: hidden;
+  /*在长单词或 URL地址内部进行换行*/
+  word-wrap: break-word;
+  /*显示省略符号来代表被修剪的文本*/
+  text-overflow: ellipsis;
+}
+
+/*
+ * flex 布局
+ * $direction 主轴方向
+ */
+@mixin flex($direction: column, $inline: flex) {
+  display: $inline;
+  flex-direction: $direction;
+  flex-wrap: nowrap;
+}
+// 水平垂直居中
+@mixin center($direction: column, $justify:center, $align:center) {
+  @include flex($direction);
+  @if ($justify != null) {
+    justify-content: $justify;
+  }
+  @if ($align != null) {
+    align-items: $align;
+  }
+}
+// 两边对齐
+@mixin space-between($direction: column) {
+  @include flex($direction);
+  justify-content: space-between;
+  align-items: center;
+}

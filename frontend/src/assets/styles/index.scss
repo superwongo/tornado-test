@@ -1,0 +1,75 @@
+@import './var.scss';
+
+body {
+  background: rgba(0,0,0,0);
+  color: $grey;
+  font-size: 14px;
+  line-height: 2;
+  font-family: Lato, Helvetica Neue For Number, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, PingFang SC, Hiragino Sans GB, "Microsoft YaHei", Helvetica Neue, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// 滚动条样式
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+// 滚动条滑块样式
+*::-webkit-scrollbar-thumb {
+  background: $blue;
+}
+// 滚动条轨道
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+@media screen and (min-width: 0) and (max-width: 768px) {
+  .blog-header > .pull-right {
+    display: none;
+  }
+  .blog-header > .toggle-menu {
+    display: block;
+  }
+  .el-container > .el-aside {
+    display: none;
+  }
+  .content-page {
+    padding: 0 !important;
+  }
+  .el-container > .el-main {
+    padding: 0 !important;
+
+    .el-card:nth-child(odd) {
+      .content-card {
+        flex-direction: column;
+      }
+    }
+    .el-card:nth-child(even) {
+      .content-card {
+        flex-direction: column;
+      }
+    }
+    .content-card {
+      .content-card-image {
+        width: 100% !important;
+      }
+      .content-card-info {
+        width: 90% !important;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .blog-header > .pull-right {
+    display: block;
+  }
+  .blog-header > .toggle-menu {
+    display: none;
+  }
+}
+
+.el-card:hover {
+  box-shadow: 0 4px 12px 12px rgba(7,17,27,0.15) !important;
+}
