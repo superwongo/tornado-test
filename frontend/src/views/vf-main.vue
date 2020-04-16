@@ -1,46 +1,31 @@
 <template>
   <div class="vf-main">
-    <el-card :body-style="{ padding: 0 }" shadow="hover" v-for="v in [1,2,3]" :key="v">
+    <el-card :body-style="{ padding: 0 }" shadow="hover" v-for="(post, index) in posts" :key="index">
       <div class="content-card">
         <div class="content-card-image">
           <img src="https://goss.veer.com/creative/vcg/veer/800water/veer-136658645.jpg"
-               alt="Docker部署Mongodb副本集集群"
-               title="Docker部署Mongodb副本集集群"
+               :alt="post.title"
+               :title="post.title"
                class="lazyload">
         </div>
         <div class="content-card-info">
-          <router-link class="article-title link--animated" to="/posts/1/" title="Docker部署Mongodb副本集集群" tag="div">
-            Docker部署Mongodb副本集集群
+          <router-link class="article-title link--animated" :to="`/posts/${index}/`" title="Docker部署Mongodb副本集集群" tag="div">
+            {{ post.title }}
           </router-link>
           <span class="article-meta">
             <span>
               <i class="fa fa-calendar article-meta__icon"/>
-              <span class="article-meta__calendar">2019-12-23</span>
+              <span class="article-meta__calendar">{{ post.calendar }}</span>
             </span>
             <span class="article-meta__separator">|</span>
-            <span>
-              <i class="fa fa-inbox article-meta__icon"/>
-              <router-link class="link--animated" to="/categories/1/" tag="span">数据库</router-link>
+            <span v-for="(category, id) in post.categories" :key="id">
+              <span>
+                <i class="fa fa-inbox article-meta__icon"/>
+                <router-link class="link--animated" :to="`/categories/${id}/`" tag="span">{{ category }}</router-link>
+              </span>
+              <span v-if="id < post.categories.length - 1"><i class="fa fa-angle-right"/></span>
             </span>
-            <span><i class="fa fa-angle-right"/></span>
-            <span>
-              <i class="fa fa-inbox article-meta__icon"/>
-              <router-link class="link--animated" to="/categories/2/" tag="span">mongo</router-link>
-            </span>
-            <span><i class="fa fa-angle-right"/></span>
-            <span>
-              <i class="fa fa-inbox article-meta__icon"/>
-            <router-link class="link--animated" to="/categories/3/" tag="span">docker</router-link>
-            </span>
-            <span><i class="fa fa-angle-right"/></span>
-            <span>
-              <i class="fa fa-inbox article-meta__icon"/>
-              <router-link class="link--animated" to="/categories/4/" tag="span">mongo</router-link>
-            </span>
-            <span class="content">
-              Mongodb简介目前常用的数据库主要分为两种：关系型数据库、非关系型数据库。其中关系型数据库常见的包括：Oracle、Mysql、PostgreSQL、SqlSever等，其主要特点就是大多数都遵循SQL（结构化查询语言，Structured
-              Query Language）标准，针对结构化的数据支 ...
-            </span>
+            <span class="content">{{ post.content }}</span>
           </span>
         </div>
       </div>
@@ -50,9 +35,25 @@
 
 <script>
 import 'lazysizes'
+import { getPostData } from '@/api/posts'
 
 export default {
-  name: 'vf-main'
+  name: 'vf-main',
+  data () {
+    return {
+      posts: []
+    }
+  },
+  mounted() {
+    this.getPostInfo()
+  },
+  methods: {
+    getPostInfo: function () {
+      getPostData().then(response => {
+        this.posts = response.data
+      })
+    }
+  }
 }
 </script>
 

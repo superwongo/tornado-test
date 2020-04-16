@@ -8,8 +8,10 @@
 """
 
 from backend.app.views.test import TestRequestHandler
+from backend.app.views.post import PostRequestHandler
 
 
 URLS = (
     ('/test', TestRequestHandler),
+    ('/post', PostRequestHandler)
 )
