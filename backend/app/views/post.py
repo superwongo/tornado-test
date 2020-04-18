@@ -8,11 +8,9 @@
 """
 
 import json
-from typing import Optional, Awaitable
+from typing import Optional, Awaitable, List, Dict
 
 from tornado.web import RequestHandler
-from tornado.httpclient import AsyncHTTPClient
-from tornado.log import gen_log
 
 
 class PostRequestHandler(RequestHandler):
@@ -27,7 +25,7 @@ class PostRequestHandler(RequestHandler):
 
     def get(self):
         self.set_header("Content-Type", "application/json; charset=UTF-8")
-        data = [
+        data: List[Dict] = [
             {
                 'title': 'Docker部署Mongodb副本集集群',
                 'calendar': '2019-12-23',
@@ -53,4 +51,4 @@ class PostRequestHandler(RequestHandler):
                            'StructuredQuery Language）标准，针对结构化的数据支 ...'
             }
         ]
-        return self.write(json.dumps(data))
+        self.write(json.dumps(data))

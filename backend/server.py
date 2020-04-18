@@ -13,13 +13,13 @@ import sys
 from tornado.ioloop import IOLoop
 from tornado.httpserver import HTTPServer
 from tornado.options import define, options, parse_command_line
-from tornado.log import app_log
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_DIR)
 
 from backend.app import create_app
+from backend.app.utils.logs import logger
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
         app = create_app()
         http_server = HTTPServer(app)
         http_server.listen(options.port)
-        app_log.info('>>>>>Tornado循环器开始启动')
+        logger.info('>>>>>Tornado循环器开始启动')
         IOLoop.current().start()
     except KeyboardInterrupt:
         pass
